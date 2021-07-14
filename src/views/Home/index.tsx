@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
+import Carousel, { ImageType } from "../../components/Carousel";
+import "../../styles.css";
 // import { Container } from './styles';
 
 interface IEpisodes {
-  title: string;
-  episode: number;
+  title?: string;
+  episode?: number;
   thumbnail: string;
 }
 
 const Home: React.FC = () => {
   const [episodes, setEpisodes] = useState<IEpisodes[]>([]);
+  const [images, setImagens] = useState<ImageType[]>();
   useEffect(() => {
+    setImagens(
+      episodes.map((item) => ({
+        thumbnail: item.thumbnail,
+      }))
+    );
     getEpisodes();
   }, []);
 
@@ -25,13 +33,14 @@ const Home: React.FC = () => {
   return (
     <>
       <div>Home</div>
-      {episodes.map((item, index) => (
+      <Carousel images={images} />
+      {/* {episodes.map((item, index) => (
         <>
           <div>#{item.episode}</div>
           <div>{item.title}</div>
           <img src={item.thumbnail} alt="Episodio" />
         </>
-      ))}
+      ))} */}
     </>
   );
 };

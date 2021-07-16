@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 
 export type ImageType = { id?: number; thumbnail: string };
 
@@ -54,7 +55,7 @@ const Carousel: React.FC<{ images?: ImageType[] }> = ({ images }) => {
 
   return (
     <div className="carousel-container">
-      <h2 className="header">Carrossel</h2>
+      <h2 className="header">HQViewer</h2>
       <div
         className="selected-image"
         style={{ backgroundImage: `url(${selectedImage?.thumbnail})` }}
@@ -65,7 +66,11 @@ const Carousel: React.FC<{ images?: ImageType[] }> = ({ images }) => {
             images.map((image, idx) => (
               <div
                 onClick={() => handleSelectedImageChange(idx)}
-                style={{ backgroundImage: `url(${image.thumbnail})` }}
+                style={{
+                  backgroundImage: `url(${image.thumbnail})`,
+                  height: 200,
+                  width: 200,
+                }}
                 key={image.id}
                 className={`carousel__image ${
                   selectedImageIndex === idx && "carousel__image-selected"
@@ -78,13 +83,13 @@ const Carousel: React.FC<{ images?: ImageType[] }> = ({ images }) => {
           className="carousel__button carousel__button-left"
           onClick={handleLeftClick}
         >
-          Prev
+          <BiChevronLeft size={32} />
         </button>
         <button
           className="carousel__button carousel__button-right"
           onClick={handleRightClick}
         >
-          Next
+          <BiChevronRight size={32} />
         </button>
       </div>
     </div>

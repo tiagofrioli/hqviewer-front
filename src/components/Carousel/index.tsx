@@ -1,7 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 
-export type ImageType = { id?: number; thumbnail: string };
+export type ImageType = {
+  id?: number;
+  thumbnail: string;
+  title: string;
+  episode: number;
+};
 
 const Carousel: React.FC<{ images?: ImageType[] }> = ({ images }) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -56,10 +61,14 @@ const Carousel: React.FC<{ images?: ImageType[] }> = ({ images }) => {
   return (
     <div className="carousel-container">
       <h2 className="header">HQViewer</h2>
+      <h1>
+        {selectedImage?.title} - #{selectedImage?.episode}{" "}
+      </h1>
       <div
         className="selected-image"
         style={{ backgroundImage: `url(${selectedImage?.thumbnail})` }}
       />
+
       <div className="carousel">
         <div className="carousel__images">
           {images &&
